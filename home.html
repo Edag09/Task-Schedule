@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Parciales</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="name-gate" class="name-gate" style="display:none;">
+  <div class="box">
+    <h2>¿Cómo te llamás?</h2>
+    <p style="color:var(--text-muted); font-size:13px;">Así sabemos quién agregó cada tarea. Solo se guarda en tu dispositivo.</p>
+    <input id="name-input" type="text" placeholder="Tu nombre" maxlength="20" />
+    <button class="btn-primary" onclick="saveName()">Entrar</button>
+  </div>
+</div>
+
+<div id="loading-gate" class="name-gate" style="display:none;">
+  <div class="box"><h2>Cargando...</h2></div>
+</div>
+
+<div class="app" id="app" style="display:none;">
+  <header>
+    <div>
+      <h1>Parciales</h1>
+      <div class="who">Hola, <strong id="who-name"></strong><button onclick="changeName()">cambiar</button></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-secondary" onclick="downloadICS()">Exportar (.ics)</button>
+      <button class="btn-secondary" onclick="openBulkModal()">Pegar lista</button>
+      <button class="btn-add" onclick="openTaskModal()">+ Agregar tarea</button>
+    </div>
+  </header>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="main-grid" id="main-grid">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="view-toggle">
+          <button id="vt-month" onclick="setCalView('month')">Mes</button>
+          <button id="vt-timeline" onclick="setCalView('timeline')">Línea de tiempo</button>
+          <button id="vt-historial" onclick="setCalView('historial')">Historial</button>
+        </div>
+      </div>
+      <div id="cal-container"></div>
+    </div>
+
+    <div class="panel">
+      <h2 id="list-title">Próximas</h2>
+      <div class="task-list" id="task-list"></div>
+    </div>
+  </div>
+</div>
+
+<div id="task-modal-root"></div>
+<div id="subject-modal-root"></div>
+<div id="bulk-modal-root"></div>
+
+<!-- Firebase (SDK compat, sin necesidad de npm/bundler) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase_config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

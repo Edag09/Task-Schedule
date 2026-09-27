@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Como la app no tiene login, dejamos estas dos colecciones abiertas
+    // a quien tenga el link — así lo decidieron ustedes desde el inicio.
+    // Esto reemplaza el "modo de prueba", que caduca solo a los 30 días
+    // y bloquearía la app si no lo cambian.
+
+    match /subjects/{subjectId} {
+      allow read, write: if true;
+    }
+
+    match /tasks/{taskId} {
+      allow read, write: if true;
+    }
+
+    // Cualquier otra colección queda cerrada por defecto.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
